@@ -1,0 +1,54 @@
+CREATE TABLE DOCTOR(
+        doc_id int primary key,
+        doc_name varchar2(20),
+        specialization varchar2(20),
+        doc_phone number(10),
+        email_id varchar2(25)
+        );
+        
+desc doctor
+
+insert into doctor values(100,'uma','ortho',9856378434,'')
+insert into doctor values(101,'Kumar','pysician',9856378434,'Kumar@gmail.com')
+insert into doctor values(102,'Ramesh','Child special',8648342312,'')
+
+select * from doctor
+
+update doctor
+set  doc_phone = 7856349741
+where doc_id = 101
+
+commit
+
+Create table patient(
+        pat_id int primary key,
+        pat_name varchar2(30),
+        pat_dob date,
+        pat_city varchar2(15),
+        pat_dist varchar2(5)
+        )
+        
+insert into patient values(1,'narayan','12-Aug-94','Bangalore','KA')
+insert into patient values(2,'Harish','17-Jul-93','Bangalore','KA')
+insert into patient values(3,'Arjun','10-Jan-92','Chennai','TN')
+insert into patient values(4,'Suraj','12-sep-90','Mysore','KA')
+
+select * from patient
+
+Create table appointment(
+            app_id int primary key,
+            app_date date,
+            Pat_id int, FOREIGN KEY(pat_id) REFERENCES patient(pat_id),
+            doc_id int, FOREIGN KEY(doc_id) REFERENCES doctor(doc_id),
+            app_time varchar(10),
+            reason varchar2(20)
+            )
+            
+insert into appointment values(50,'24-Aug-21',1,100,'10:00 AM','leg pain')
+insert into appointment values(51,'24-Aug-21',3,101,'10:15 AM','fever')
+insert into appointment values(52,'25-Aug-21',1,100,'11:00 AM','followup')
+insert into appointment values(53,'26-Aug-21',2,101,'12:00 PM','fever')
+insert into appointment values(54,'26-Aug-21',3,100,'11:00 AM','back pain')
+insert into appointment values(55,'26-Aug-21',1,100,'10:15 AM','followup')
+
+select * from appointment

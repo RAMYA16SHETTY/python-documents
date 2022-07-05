@@ -1,0 +1,183 @@
+'''create a class SimpleInterest
+   have the attributes called
+   principle, rate and time
+   compute the SI and amount
+   Given
+   SI = (P x R x T)/100
+   Amount = SI + Principle'''
+class SimpleInterest:
+    def __init__(self):
+        self.principle = 0
+        self.rate = 0
+        self.time = 0
+        self.prt = 0
+        self.amount = 0
+    def principle_amount(self):
+        self.principle = float(input("Enter the principle value:"))
+    def rate_amount(self):
+        self.rate = float(input("Enter the rate value:"))
+    def time_value(self):
+        self.time = float(input("Enter the years:"))
+    def calculate_prt(self):
+        self.prt = (self.principle * self.rate * self.time) / 100
+    def total_amount(self):
+        self.amount = self.prt + self.principle
+    def display_value(self):
+        self.calculate_prt()
+        self.total_amount()
+        print("This is the calculating amount of Simple interest:", self.prt)
+        print("This is the total amount:", self.amount)
+
+simple = SimpleInterest()
+simple.principle_amount()
+simple.rate_amount()
+simple.time_value()
+simple.calculate_prt()
+simple.total_amount()
+simple.display_value()
+------------------------------------------
+'''create a class called Selling
+   have attributes like 
+   cost price, profit percentage 
+   selling price
+   input the cost price and profit percentage
+   compute the selling price
+   SP = CP + (CP x profit percentage)
+   display the selling price
+'''
+class Selling:
+    def __init__(self):
+        self.cost_price=0
+        self.profit_percentage=0
+        self.selling_price=0
+
+    def input_price(self):
+        self.cost_price=int(input("Enter the amount of cost price:"))
+    def input_profit(self):
+        self.profit_percentage=int(input("Enter the profit percentage:"))
+    def calculate(self):
+        self.selling_price=self.cost_price+(self.cost_price * self.profit_percentage)
+    def display_price(self):
+        self.calculate()
+        print("This is the selling price:",self.selling_price)
+
+sell=Selling()
+sell.input_price()
+sell.input_profit()
+sell.display_price()
+---------------------------------------
+
+'''once 2 is working modify it to handle this...
+   for this create another class SellingByCatgz
+   have a attribute called category
+   input the category as A or B or C
+   given 
+ if it is A then profit percentage is assigned
+ as 8.5
+ if it is B then profit percentage is 10.5
+ otherwise it is 12.5'''
+class SellingByCatgz:
+    def __init__(self):
+        self.category=''
+        self.cost_price=0
+        self.profit_percentage=0
+        self.selling_price=0
+
+    def input_price(self):
+        self.cost_price=int(input("Enter the amount of cost price:"))
+    def input_category(self):
+        self.category = input("Enter the Category:")
+    def calculate_profit(self):
+        if self.category=='A' or self.category=='a':
+            self.profit_percentage=8.0/100
+        elif self.category=='B' or self.category=='b':
+            self.profit_percentage=10.5/100
+        elif self.category=='C' or self.category=='c':
+            self.profit_percentage=12.5/100
+        else:
+            print("This invalid category")
+
+    def calculate(self):
+        self.selling_price = self.cost_price + (self.cost_price * self.profit_percentage)
+    def display_amount(self):
+        self.calculate_profit()
+        self.calculate()
+        print("This is the selling amount:",self.selling_price)
+
+sell=SellingByCatgz()
+sell.input_price()
+sell.input_category()
+sell.calculate_profit()
+sell.calculate()
+sell.display_amount()
+-----------------------------------------
+'''
+ create a class called Product
+   have the attribute prod id, prod name, rate_actual
+   and rate_selling
+   also have the prod_catg which is 'E' or 'T'
+   if the prod_catg is 'E' then
+      rate selling will be 12.5% of rate actual
+      add 1% more if rate selling is less than 1000
+   if the prod catg is 'T' then
+      rate selling will be 14.5% of rate actual
+      add 1.5% more if the rate selling 
+      is in the range of 500 to 2900
+'''
+class Product:
+    def init(self):
+        self.prod_id = 0
+        self.prod_name = ""
+        self.rate_actual = 0
+        self.rate_selling = 0
+        self.prod_catg = ""
+        self.profitRate = 0
+
+    def input_id(self):
+        self.prod_id = int(input("Enter the product id:"))
+
+    def input_name(self):
+        self.prod_name = (input("Enter the product name:")).upper()
+
+    def input_rate(self):
+        self.rate_actual = int(input("Enter the actual rate:"))
+
+    def input_selling(self):
+        self.rate_selling = int(input("Enter the selling price:"))
+
+    def input_category(self):
+        self.prod_catg = input("Enter the Category of product belongs to(E  or T):")
+
+    def calculate_product(self):
+        if self.prod_catg == 'E' or self.prod_catg == 'e':
+            self.rate_selling += self.rate_selling * 12.5 / 100
+            self.profitRate = 12.5
+
+            if self.rate_selling < 1000:
+                self.rate_selling += self.rate_selling * 0.01
+                self.profitRate += 1
+
+        elif self.prod_catg == 'T' or self.prod_catg == 't':
+            self.rate_selling += self.rate_selling * 14.5 / 100
+            self.profitRate = 14.5
+            if self.rate_selling >=500  or self.rate_selling <= 2900:
+                self.rate_selling += self.rate_selling * 0.15
+                self.profitRate += 1.5
+        else:
+            print("Given data is invalid")
+
+    def prod_display(self):
+        self.calculate_product()
+        print("This is the Product category is:",self.prod_catg)
+        print("This is the profit price:",self.profitRate)
+        print("This is the selling price:",self.rate_selling)
+
+sell = Product()
+sell.input_id()
+sell.input_name()
+sell.input_rate()
+sell.input_selling()
+sell.input_category()
+sell.prod_display()
+
+

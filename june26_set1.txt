@@ -1,0 +1,65 @@
+'''find the area and perimeter of the circle
+   area is  3.14 x radius x radius
+   circf is 2 x 3.14 x radius'''
+'''import math
+def Area_Circle(Radius):
+    area = 3.14 * Radius * Radius
+    return area
+def Perimeter_Circle(Radius):
+    perimeter=2*3.14*Radius
+    return perimeter
+Radius =float(input("Enter radius value:"))
+print("This is the Area of circle:",Area_Circle(Radius))
+print("This is the Perimeter of circle:",Perimeter_Circle(Radius))'''
+
+
+'''find the area of the rectangle, perimeter of the rectangle
+   length of the diagonal of the rectangle (find the formula in the net)
+   write 3 methods
+   find rectangle area
+   find rectangle perimeter
+   find the diagonal length'''
+'''import math
+def Area_Rectangle(breath,heigth):
+    rectangle=breath*heigth
+    return rectangle
+def Perimeter_rectangle(breath,heigth):
+    perimeter=2*(breath+heigth)
+    return perimeter
+def Diagonal_rectangle(breath,height):
+    diangoal=math.sqrt((height**2)+(breath**2))
+    return diangoal
+
+breath=float(input("Enter the breath value:"))
+heigth=float(input("Enter the length value"))
+print("This is area of rectangle:",Area_Rectangle(breath,heigth))
+print("This is perimeter of rectangle:",Perimeter_rectangle(breath,heigth))
+print("This is diangoal of rectangle:",Diagonal_rectangle(breath,heigth))'''
+
+'''write a program to calculate the simple interest and amount
+   SI = Priniciple x rate x time
+   amount = SI + principle
+   condition:
+     for all the prinicple less than 10 lakhs the rate of interest
+     is 6.75 pa
+     above 10L but less than 50L the rate of interest is 7.5 pa
+     above 50L the rate of interest is 8.5 pa'''
+
+prinicple=int(input("Enter Principal amount"))
+time=int(input("Enter number of years"))
+
+if prinicple <= 1000000:
+    rate=6.75
+    SI =  (prinicple * time * rate) / 100
+    print("SIMPLE INTEREST:", SI)
+elif prinicple > 1000000 and prinicple <= 5000000:
+    rate=7.5
+    SI = (prinicple * time * rate) / 100
+    print("SIMPLE INTEREST:", SI)
+elif prinicple>5000000:
+    rate=8.5
+    SI = (prinicple * time * rate) / 100
+    print("SIMPLE INTEREST:", SI)
+
+
+

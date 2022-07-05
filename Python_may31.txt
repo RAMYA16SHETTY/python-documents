@@ -1,0 +1,48 @@
+1)if the battery level is less than 10% show red
+between 11 to 40 - show the orange color
+41 to 100 - show it in green color
+
+battery=int(input("enter battery percentage"))
+if battery >41 and battery <100:
+    print("show green color")
+elif battery > 11 and battery < 40:
+    print("show orange color")
+elif battery < 10:
+    print("show Red color")
+---------------------------------------------------------
+2)n = 125
+check if the number is NOT in the following ranges
+145 to 190
+25 to 88
+441 to 750'''
+n=125
+if n not in range(145,190+1):
+    if n not in range(25,88+ 1):
+        if n not in range(441,750 + 1):
+          print ("the given value not in range")
+else:
+    print("the given number in range")
+----------------------------------------------------------------
+
+3)Ramesh user Id is A1010 and the password is hello123
+userid=input("enter user id")
+password=input("enter password")
+if userid =='A1010'and password =='hello123':
+    print("valid userid and password")
+else:
+    print("invalid userid and password")
+---------------------------------------------------------------
+
+3.1)when Ramesh enters the RIGHT user id and password 
+display the message 'Welcome Ramesh'
+
+userid=input("enter user id")
+password=input("enter password")
+if userid =='A1010'and password =='hello123':
+    print("welcome Ramesh")
+else:
+    print("sorry your not ramesh")
+
+
+-----------------------------------------------------
+

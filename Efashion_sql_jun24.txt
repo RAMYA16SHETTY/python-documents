@@ -1,0 +1,100 @@
+SELECT * FROM SHOP_DIMENSION;
+SELECT * FROM CALENDER_DIMENSION;
+SELECT * FROM ARTICLE_DIMENSION;
+SELECT * FROM SHOP_FACTS;
+COMMIT
+
+---2.Identify the relationship between these tables. On what basis you are going to say which is the PK and FK tables. Do the analysis and jot down your observation.										
+SHOP_DIMENSION-PARTENT TABLE
+CALENDER_DIMENSION-PARTENT TABLE
+ARTICLE_DIMENSION-PARTENT TABLE
+SHOP_FACTS-CHILD TABLE ,REFERENCES WITH SHOP_DIMENSION,CALENDER_DIMENSION,ARTICLE_DIMENSION
+
+--3.Capture how many records we have in each table.
+SELECT COUNT(SHOP_ID)
+FROM SHOP_DIMENSION
+
+SELECT COUNT(WEEK_ID)
+FROM CALENDER_DIMENSION
+
+SELECT COUNT(ARTICLE_ID)
+FROM ARTICLE_DIMENSION
+
+SELECT COUNT(SHOP_FACTS_ID)
+FROM SHOP_FACTS
+
+---4.If I do an inner join between shop_dimension and shop_facts, how many records we are expecting.
+SELECT COUNT(SHOP_DIMENSION.SHOP_ID),COUNT(SHOP_FACTS.SHOP_FACTS_ID)
+FROM SHOP_DIMENSION INNER JOIN SHOP_FACTS
+ON SHOP_DIMENSION.SHOP_ID = SHOP_FACTS.SHOP_ID
+
+---5.Find the shop_name which are in Dallas city or in New York city with the floor_space > 2000
+SELECT SHOP_NAME
+FROM SHOP_DIMENSION
+WHERE (CITY = 'DALLAS' OR CITY='NEW YORK')
+AND FLOOR_SPACE >2000
+
+---6.Find the article_label which we dont have any sales records
+SELECT ARTICLE_LABEL
+FROM ARTICLE_DIMENSION
+WHERE ARTICLE_ID NOT IN (SELECT ARTICLE_ID
+                        FROM SHOP_FACTS)                      
+                         
+---7.find the article_label which is most expensive in the respective family.
+SELECT ARTICLE_LABEL,SALE_PRICE
+FROM ARTICLE_DIMENSION
+WHERE (SALE_PRICE,FAMILY_NAME) IN (SELECT MAX(SALE_PRICE)AS EXPENSIVE_PRICE,FAMILY_NAME
+                                    FROM ARTICLE_DIMENSION
+                                    GROUP BY FAMILY_NAME)
+
+---8 Display category, article_label, first word from the article label as Code,show family name as (Family Name concatenate with family code)
+--for all the articles which is priced more than the average price of all the articles.
+SELECT CATEGORY,ARTICLE_LABEL,SUBSTR(ARTICLE_LABEL,1, INSTR(ARTICLE_LABEL,' ')-1) AS CODE,(FAMILY_NAME||FAMILY_CODE) AS FAMILY_NAME
+FROM ARTICLE_DIMENSION
+WHERE SALE_PRICE > 
+(SELECT AVG(SALE_PRICE)FROM ARTICLE_DIMENSION)
+
+---9.Find famlily, category and number of article lables. Consider only category and family which has more than 10 articles.
+SELECT FAMILY_NAME,CATEGORY,COUNT(ARTICLE_ID)
+FROM ARTICLE_DIMENSION
+GROUP BY FAMILY_NAME,CATEGORY
+HAVING COUNT(ARTICLE_ID) >10
+
+---10Find the common priced products between Accessories and City Skirts family
+SELECT ARTICLE_LABEL
+FROM ARTICLE_DIMENSION
+WHERE SALE_PRICE IN (SELECT AVG(SALE_PRICE)
+                        FROM ARTICLE_DIMENSION
+                        WHERE FAMILY_NAME ='ACCESSORIES' AND FAMILY_NAME='CITY SKIRTS FAMILY')
+                        
+---11.Display family, Category, count of products at category level, count of products at family level
+SELECT FAMILY_NAME,CATEGORY,COUNT(CATEGORY),COUNT(FAMILY_NAME)
+FROM ARTICLE_DIMENSION
+GROUP BY FAMILY_NAME,CATEGORY
+
+---12Display Yearwise, familywise, sales_revenue.
+SELECT YR,FAMILY_NAME,SUM(AMOUNT_SOLD)AS SALES_REVENUE
+FROM CALENDER_DIMENSION INNER JOIN SHOP_FACTS
+ON CALENDER_DIMENSION.WEEK_ID = SHOP_FACTS.WEEK_ID
+INNER JOIN ARTICLE_DIMENSION
+ON ARTICLE_DIMENSION.ARTICLE_ID = SHOP_FACTS.ARTICLE_ID
+GROUP BY YR,FAMILY_NAME
+
+---13.Find the top 2 article_labels we sold in each year.
+SELECT * FROM
+(SELECT DISTINCT(ARTICLE_LABEL),YR,DENSE_RANK() OVER(PARTITION BY YR ORDER BY SALE_PRICE DESC) RATE
+FROM CALENDER_DIMENSION INNER JOIN SHOP_FACTS
+ON CALENDER_DIMENSION.WEEK_ID = SHOP_FACTS.WEEK_ID
+INNER JOIN ARTICLE_DIMENSION
+ON ARTICLE_DIMENSION.ARTICLE_ID = SHOP_FACTS.ARTICLE_ID
+ORDER BY YR)
+WHERE RATE<=2
+
+---14.create a view which will give us Shop_Name, Article_Label, week_in_year, year, quantity_sold, amount_sold, margin, cost										
+   --for the family in Accessories call it as accessories_sales_view										
+CREATE VIEW ACCESSORIES_SALES_VW(SHOP_NAME1,ARTICLE_LABEL1,WEEK_IN_YEAR1,QUANTITY_SOLD1,AMOUNT_SOLD,MARGIN) AS
+SELECT SHOP_NAME,ARTICLE_LABEL,WEEK_IN_YEAR,QUANTITY_SOLD,AMOUNT_SOLD,MARGIN
+FROM SHOP_DIMENSION INNER JOIN SHOP_FACTS
+ON SHOP_DIMENSION.SHOP_ID = SHOP_FACTS.SHOP_ID
+INNER JOIN ARTICLE_DIMENSION
+ON ARTICLE_DIMENSION.ARTICLE_ID = SHOP_FACTS.ARTICLE_ID

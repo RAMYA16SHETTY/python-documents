@@ -1,0 +1,81 @@
+
+using if,elif,operator
+'''
+1..................
+num = int(input("Enter the number: "))
+if num<0:
+    print("Cannot process negative numbers")
+elif num>0 and num<=9:
+    print("Number is a single digit number",num)
+elif num>9 and num<=99:
+    print("Number is a double digit number",num)
+elif num>99 and num<=999:
+    print("Number is a triple digit number",num)
+elif num>999 and num<=9999:
+    print("Number is a quadruple digit number",num)
+elif num>9999 and num<=99999:
+    print("Number is a quintuple digit number",num)
+elif num>99999 and num<=999999:
+    print("Number is a six digit number",num)
+else:
+    print("Number is a very large number")
+'''
+2...................
+'''name=input("enter name of student:")
+rank = int(input("Enter Percentage of Student:"))
+if rank <= 100:
+    if rank >= 80:
+        print("Eligiable for MBBS")
+    else:
+       print("Not eligiable for MBBS")
+    if (rank <= 80 and rank >= 70):
+        print("Eligiable for  Engineering")
+    else:
+        print("Not eligiable for Engineering")
+    if (rank <=70 and rank >= 50):
+        print("Eligiable for arts and sience")
+else:
+    print("Percentage can not be more then 100:", rank)'''
+
+3.....................
+using operator
+---------------
+'''num=int(input("enter the number"))
+if(num>10 and num<50):
+     n=num*3
+     print(n)
+elif(num>50 and num<100):
+       n=num+10
+       print(n)
+else:
+       n=num+15
+       print(n)'''
+
+
+
+4.......................
+checking for canditate eligible for job are not
+-------------------------
+name=str(input("enter employee name:"))
+skill=str(input("enter employee skill"))
+csalary=int(input("enter current salary:"))
+esalary=int(input("enter expected salary:"))
+exp=int(input("enter total year of experience"))
+if name.isalpha() and skill.isalpha():
+    if (skill=="sql" or skill=="python" or skill== "datawarehousing"):
+        print("canditate is eligible for this job")
+    if(csalary<=5):
+        print("canditate is eligible for this job")
+    else:
+        print("canditate not eligible for this job")
+    if(esalary<=8):
+        print("canditate is eligible for this job")
+    else:
+        print("canditate not eligible for this job")
+    if(exp>=4):
+        print("canditate is eligible for this job")
+    else:
+        print("canditate not eligible for this job")
+else:
+    print("canditate not eligible for this job")
+

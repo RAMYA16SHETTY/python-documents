@@ -1,0 +1,64 @@
+'''given emp_names=['Shankar','Pankaj','Rashmi', ...and so on ...add few more names]
+  Find how many names are there
+  how many names start with either S or R
+  display the length of each name
+  example
+       Shankar  7
+       Pankaj   6'''
+emp_names=['Shankar','Pankaj','Rashmi','Ramya','Priya','Madhu','Vidhya','Arun']
+print("this the length of the list:",len(emp_names))
+check='S'or'R'
+for names in  emp_names:
+    if names[0].lower()== check.lower():
+        print(names)
+
+'''readings = (10.22,16.22,7.9,19.01,15.08,....add few more values)
+   find the total and avg reading value
+   which is the lowest reading?
+   which is the highest reading?
+   how many times does the reading 16.22 occurs?'''
+readings=(10.22,16.22,7.9,19.01,15.08,18.01,30.01,17.6,16.22,15.91,8.01,14.19)
+total=sum(readings)
+print("This is the total :",total)
+length=len(readings)
+average=total//length
+print("This is the average of elements :",average)
+print("This the lowest element :",min(readings))
+print("This the highest element :",max(readings))
+no_value=readings.count(16.22)
+print("No of elements:",no_value)
+
+''' use filter and reduce concepts
+   data1 = [12,17,20,22,16,50,100,125,180,19,29,49]
+   find the sum of all the TWO digit ODD number and also find the avg.
+   remove the highest and lowest value'''
+
+data1 = [12,17,20,22,16,50,100,125,180,19,29,49]
+
+def Odd_number(List):
+    if List>9 and List<100:
+        return list
+two_digit_odd=filter(Odd_number,data1)
+odd_list = list(two_digit_odd)
+print(odd_list)
+sum=sum(odd_list)
+length=len(odd_list)
+average=sum//length
+print("sum of all two digit number:",sum)
+print("Average of two digit odd number : ",average)
+data1.remove(max(data1))
+data1.remove(min(data1))
+print("After removing data:",data1)
+
+'''use for loop. input 5 salary of employees add it into the list one by one
+   find the highest salary from the list
+   remove from the list the LAST salary data inputted'''
+lst=[]
+for i in range(0,5):
+    salary=int(input("Enter the person salary:"))
+    lst.append(salary)
+print(lst)
+print("This is the higest salary :",max(lst))
+remove=lst[:-1]
+print("Trimmed last salary:",remove)
+
